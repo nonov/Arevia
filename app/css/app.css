@@ -1,0 +1,229 @@
+/* Colored Headers */
+.bg {
+    border-radius: 5px;
+}
+.bg-red {
+    border-top: 1px outset #E01020;
+    border-right: 1px inset #E01020;
+    border-bottom: 1px inset #E01020;
+    border-left: 1px outset #E01020;
+}
+.bg-orange {
+    border-top: 1px outset #FF9934;
+    border-right: 1px inset #FF9934;
+    border-bottom: 1px inset #FF9934;
+    border-left: 1px outset #FF9934;
+}
+.bg-blue {
+    border-top: 1px outset #1049FC;
+    border-right: 1px inset #1049FC;
+    border-bottom: 1px inset #1049FC;
+    border-left: 1px outset #1049FC;
+}
+.bg-light_blue {
+    border-top: 1px outset #90C1F9;
+    border-right: 1px inset #90C1F9;
+    border-bottom: 1px inset #90C1F9;
+    border-left: 1px outset #90C1F9;
+}
+.bg-purple {
+   border-top: 1px outset #C0D75E;
+   border-right: 1px inset #C0D75E;
+   border-bottom: 1px inset #C0D75E;
+   border-left: 1px outset #C0D75E;
+}
+/* Colored Titles on Hover */
+.titleSection {
+    transition: 1s linear;
+}
+#red:hover {
+    background-color: #E01020;
+}
+#orange:hover {
+    background-color: #FF9934;
+}
+#blue:hover {
+    background-color: #1049FC;
+}
+#light_blue:hover {
+    background-color: #90C1F9;
+}
+#purple:hover {
+    background-color: #C0D75E;
+}
+#yellow:hover {
+    background-color: #FDA800;
+}
+#white:hover {
+    background-color: #FFFFFF;
+    color: #999999;
+}
+body {
+    background-color: #333333;
+}
+h1 {
+    font-weight: 200;
+}
+.navbar {
+    border-radius: 0;
+    border: none;
+    box-shadow: 4px 4px 6px black;
+    margin: 0;
+}
+.navbar-inverse {
+    background-color: transparent;
+}
+.navbar-header p.lead {
+	font-size: 100%;
+}
+.jumbotron p{
+    font-size: 120%;
+}
+.page-header {
+    color: white;
+}
+.logoContainer {
+    margin-top: 10vh;
+}
+img[alt="Muriel_Guillet"] {
+    border-radius: 50%;
+}
+img[alt="Arrow"] {
+    width: 80px;
+    height: 100px;
+}
+.sectionsMenu {
+    margin-top: 15vh;
+}
+.sectionsContent {
+    margin-top: 1vh;
+    height: 65vh;
+    overflow: auto;
+}
+.contentHeader {
+    margin: 0 0 0 0;
+}
+#carouselContainer {
+    margin-top: 5em;
+    max-width: 500px;
+    max-height: 400px;
+}
+.carousel.slide {
+    box-shadow: 8px 8px 8px black;
+}
+.carousel-inner {
+    max-width: 500px;
+    max-height: 400px;
+}
+.dropzone.lead {
+    border: 1px solid #8A8A8A;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    margin: auto;
+    font-size: 120%;
+    padding-top: 3.5em;
+}
+.drop-box {
+    width: 170px;
+    height: 170px;
+    margin: auto;
+}
+.dragover {
+    opacity: 0.4;
+}
+.dropImg {
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    margin: auto;
+    box-shadow: 6px 6px 6px #8A8A8A;
+}
+.articleContainer {
+    margin-top: 5vh;
+}
+.gestionControl {
+    position: absolute;
+    margin-top: 5vh;
+}
+.has-feedback .form-control-feedback {
+    top: 0px;
+    z-index: 2;
+}
+.validationError {
+    color: red;
+    display: block;
+}
+.deleteButton {
+    color: #D9534F;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    padding: 0;
+}
+.deleteButton:hover, .deletePostButton:hover {
+    color: #D9534F;
+}
+.deletePostButton {
+    color: #D9534F;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.fullArticleButton:hover {
+    cursor: pointer;
+}
+.postContainer {
+    position: relative;
+    border-bottom: 1px solid #EEEEEE;
+}
+.confirmationBlock {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+.deletepostConfirmModal {
+    z-index: 9999;
+}
+.tinyFlag {
+    width: 20px;
+    height: 20px;
+}
+.topWord {
+    position: relative;
+    top: -5px;
+}
+.notStrong {
+    font-weight: inherit;
+}
+.media {
+    margin-top: 0;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
+{
+    display: none;
+}
+#splash-page.ng-cloak  /*<-- This has higher specificity so it can display a splash screen*/
+{
+    display: block;
+}
+.loadingLogo {
+    color: white;
+}
+.letterLogo {
+    width: 30%;
+}
+.loadingContainer {
+    padding-top: 20%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.side-border {
+    border-right: 1px dotted grey;
+}
+.address {
+    margin-top: 5%;
+}

@@ -1,0 +1,93 @@
+﻿<div class="container-fluid text-center" ng-init="display()" ng-controller="BlogCtrl">
+	<div class="container">
+
+		<div class="container gestionControl" ng-show="currentUser">
+			<div class="col-md-3">
+
+				<div class="col-md-12">
+					<button class="pull-left btn btn-primary" ng-click="gestion = !gestion"> Gestion du Blog </button>
+				</div><!-- class col-md-12 -->
+
+				<div class="col-md-12">
+					<ul class="nav nav-pills nav-stacked well" ng-show="gestion" role="navigation">
+						<li role="presentation" ng-click="clicked = 0" ng-class="{active: clicked == 0}"><a type="button" class="btn btn-link" ng-click="signOut()"> Déconnexion </a></li>
+						<li role="presentation" ng-click="clicked = 1" ng-class="{active: clicked == 1}"><a type="button" class="btn btn-link" data-toggle="modal" data-target="#addArticleModal"> Ajouter un article </a></li>
+					</ul><!-- class nav nav-pills nav-stacked -->
+				</div><!-- class col-md-12 -->
+
+			</div><!-- class col-md-3 -->
+		</div><!-- class container-fluid -->
+		
+		<!-- Carousel Section -->
+		<div class="container" id="carouselContainer">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				</ol><!-- class carousel-indicators -->
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					
+					<div class="item active">
+						<img class="img-responsive" src="img/article1.jpg" alt="Article 1">
+						<div class="carousel-caption">
+							<h3> Article 1 </h3>
+						</div><!-- class carousel-caption -->
+					</div><!-- class item -->
+
+					<div class="item">
+						<img class="img-responsive" src="img/article2.jpg" alt="Article 2">
+						<div class="carousel-caption">
+							<h3> Article 2 </h3>
+						</div><!-- class carousel-caption -->
+					</div><!-- class item -->
+
+					<div class="item">
+						<img class="img-responsive" src="img/article3.jpg" alt="Article 3">
+						<div class="carousel-caption">
+							<h3> Article 3 </h3>
+						</div><!-- class carousel-caption -->
+					</div><!-- class item -->
+
+				</div><!-- class carousel-inner -->
+
+				<!-- Controls -->
+				<a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only"> Previous </span>
+				</a><!-- class left carousel-control -->
+
+				<a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only"> Next </span>
+				</a><!-- class right carousel-control -->
+
+			</div><!-- class carousel slide -->
+		</div><!-- class container -->
+
+		<!-- ARTICLES PART -->
+		<div class="container articleContainer">
+			<p ng-show="message" class="lead well"> {{message}} </p>
+			<!-- Each articles -->
+			<div class="col-md-4" ng-repeat="article in articles">
+				<div class="media">
+					<a type="button" ng-show="currentUser" class="btn btn-link deleteButton" ng-click="OpenDeleteArticle(article)"><i class="fa fa-times-circle-o fa-2x"></i></a>
+					<div class="text-center">
+						<a class="thumbnail">
+							<img class="img-responsive center-block fullArticleButton" ng-src="{{article.img_path}}" ng-click="fullArticle(article)">
+							<div class="caption">
+								<p class="text-center lead thumbnailContent"> {{article.title}} </p>
+							</div><!-- class caption -->
+						</a>
+					</div><!-- class text-center -->
+				</div><!-- class media -->
+			</div><!-- class col-md-4 -->
+
+		</div><!-- class container -->
+
+	</div><!--class container -->
+</div><!-- container-fluid text-center -->

@@ -1,0 +1,53 @@
+<div class="container-fluid text-center">
+	<div class="container">
+
+		<div class="page-header lead bg bg-orange">
+			<h1> Choisir <strong class="notStrong"> AREVIA </strong></h1>
+		</div><!-- class page-header -->
+
+		<div class="row">
+
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked well sectionsMenu text-left" role="navigation">
+					<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a> 3 Bonnes Raisons </a></li>
+					<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a> Témoignages </a></li>
+					<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a> M. Guillet </a></li>
+				</ul><!-- class nav nav-pills nav-stacked -->
+			</div><!-- class col-md-3 -->
+
+			<div class="col-md-9 jumbotron sectionsContent">	
+				
+				<!-- 3 Bonnes Raisons Section -->
+				<div ng-show="section == 0" class="media">
+					<h1 class="lead text-left contentHeader"> 3 Bonnes Raisons </h1>
+
+					<div class="media-body text-left">
+						<p><strong class="notStrong"> AREVIA </strong> intervient en Français et en Anglais dans des contextes multiculturels. </p>
+						<p> — Diversité d'approches : parce que chaque individu est différent, <strong class="notStrong"> AREVIA </strong> combine différentes approches telles que la PNL, l'analyse transactionnelle ou la systémique pour s'y ajuster. </p>
+						<p> — Puissance de l'Art : parce que l’art ne sert pas qu’à divertir, <strong class="notStrong"> AREVIA </strong> l’utilise dans ses processus de <strong class="notStrong"> Team Building </strong> pour développer l’audace et le leadership. </p>
+						<p> — Expérience & Innovation : après 25 ans d’expérience en entreprise, <strong class="notStrong"> AREVIA </strong> a développé une méthode unique (BR®) pour transformer radicalement les relations en entreprise. Pour en savoir plus <a href="#/contact"> cliquez ici </a>. </p>
+					</div><!-- class media-body text-left -->
+				</div><!-- class media -->
+
+				<!-- Témoignages Section -->
+				<div ng-show="section == 1" class="media">
+					<h1 class="lead text-left contentHeader"> Témoignages </h1>
+
+					<div class="media-body text-left">
+					</div><!-- class media-body text-left -->
+				</div><!-- class media -->
+
+				<!-- M. Guillet Section -->
+				<div ng-show="section == 2" class="media">
+					<h1 class="lead text-left contentHeader"> M. Guillet </h1>
+
+					<div class="media-body text-left">
+					</div><!-- class media-body text-left -->
+				</div><!-- class media -->
+
+			</div><!-- class col-md-9 jumbotron sectionsContent -->
+
+		</div><!-- class row -->
+
+	</div><!-- class container -->
+</div><!-- container-fluid text-center -->
