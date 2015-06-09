@@ -1,22 +1,15 @@
 ﻿<div class="container-fluid text-center" ng-init="display()" ng-controller="BlogCtrl">
 	<div class="container">
 
-		<div class="container gestionControl" ng-show="currentUser">
-			<div class="col-md-3">
-
-				<div class="col-md-12">
-					<button class="pull-left btn btn-primary" ng-click="gestion = !gestion"> Gestion du Blog </button>
-				</div><!-- class col-md-12 -->
-
-				<div class="col-md-12">
-					<ul class="nav nav-pills nav-stacked well" ng-show="gestion" role="navigation">
-						<li role="presentation" ng-click="clicked = 0" ng-class="{active: clicked == 0}"><a type="button" class="btn btn-link" ng-click="signOut()"> Déconnexion </a></li>
-						<li role="presentation" ng-click="clicked = 1" ng-class="{active: clicked == 1}"><a type="button" class="btn btn-link" data-toggle="modal" data-target="#addArticleModal"> Ajouter un article </a></li>
-					</ul><!-- class nav nav-pills nav-stacked -->
-				</div><!-- class col-md-12 -->
-
-			</div><!-- class col-md-3 -->
-		</div><!-- class container-fluid -->
+		<div class="row" ng-show="currentUser">
+			<div class="col-xs-12">
+				<button type="button" class="btn btn-primary" ng-click="gestion = !gestion"> Gestion du Blog </button>
+				<div class="btn-group" role="group" ng-show="gestion">
+ 					<button type="button" class="btn btn-default" ng-click="signOut()"> Déconnexion </button>
+ 					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addArticleModal"> Ajouter un article </button>
+ 				</div><!-- class btn-group -->
+			</div><!-- class col-xs-12 -->
+		</div><!-- class row -->
 		
 		<!-- Carousel Section -->
 		<div class="container" id="carouselContainer">

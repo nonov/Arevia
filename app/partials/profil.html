@@ -1,13 +1,18 @@
 <div class="container-fluid text-center">
 	<div class="container">
 
-		<div class="page-header lead bg bg-red">
-			<h1> Profil </h1>
-		</div><!-- class page-header -->
+		<img src="img/BLANC/A.png" class="hidden-xs hidden-sm" alt="logoBG">
 
 		<div class="row">
+			<div class="page-header lead bg bg-red">
+				<h1> Profil </h1>
+			</div><!-- class page-header -->
+		</div><!-- class row -->
+		
+		<div class="row">
 
-			<div class="col-md-3">
+			<!-- Large & Medium Sreens -->
+			<div class="col-md-3 visible-md visible-lg">
 				<ul class="nav nav-pills nav-stacked well sectionsMenu text-left" role="navigation">
 					<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a> Identité </a></li>
 					<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a> Vocation </a></li>
@@ -16,17 +21,60 @@
 					<li role="presentation" ng-click="section = 4" ng-class="{active: section == 4}"><a> Formation </a></li>
 					<li role="presentation" ng-click="section = 5" ng-class="{active: section == 5}"><a> Philosophie </a></li>
 				</ul><!-- class nav nav-pills nav-stacked -->
-			</div><!-- class col-md-3 -->
+			</div><!-- class col-md-3 visible-md visible-lg -->
 
-			<div class="col-md-9 jumbotron sectionsContent">			
+			<!-- Small Screen -->
+			<ul class="nav nav-pills well text-left visible-sm" role="navigation">
+				<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a> Identité </a></li>
+				<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a> Vocation </a></li>
+				<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a> Valeurs </a></li>
+				<li role="presentation" ng-click="section = 3" ng-class="{active: section == 3}"><a> Parcours Entreprise </a></li>
+				<li role="presentation" ng-click="section = 4" ng-class="{active: section == 4}"><a> Formation </a></li>
+				<li role="presentation" ng-click="section = 5" ng-class="{active: section == 5}"><a> Philosophie </a></li>
+			</ul><!-- class nav nav-pills nav-stacked -->
+
+			<!-- XSmall Screens -->
+			<nav class="navbar navbar-default navSmallDevices visible-xs" role="navigation">
+				<div class="container-fluid">
+
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+							<span class="sr-only"> Toggle navigation </span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div><!-- class navbar-header -->
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+						<ul class="nav nav-pills nav-stacked">
+							<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Identité </a></li>
+							<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Vocation </a></li>
+							<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Valeurs </a></li>
+							<li role="presentation" ng-click="section = 3" ng-class="{active: section == 3}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Parcours Entreprise </a></li>
+							<li role="presentation" ng-click="section = 4" ng-class="{active: section == 4}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Formation </a></li>
+							<li role="presentation" ng-click="section = 5" ng-class="{active: section == 5}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Philosophie </a></li>
+						</ul><!-- class nav navbar-pills nav-stacked -->
+
+					</div><!-- class collapse navbar-collapse -->
+
+				</div><!-- container-fluid -->
+			</nav><!-- class navbar navbar-default -->
+
+			<div class="col-md-9 col-xs-12 jumbotron sectionsContent">			
 				<!-- Identité Section -->
 				<div ng-show="section == 0" class="media">
-					<h1 class="lead text-left contentHeader"> Identité </h1>
-					<div class="pull-right">
-						<img class="media-object img-responsive"src="img/profil.jpeg" alt="Muriel_Guillet">
-					</div>
-					<div class="media-body text-left">
-						<p> Née le 10 Août 1964, l'heureuse maman de 4 enfants. </p>
+					
+					<h1 class="text-left contentHeader"> Identité </h1>
+					
+					<!-- XSmall Screens -->
+					<div class="col-xs-12 visible-xs">
+						<img class="center-block img-responsive" src="img/profil.jpeg" alt="Muriel_Guillet">
+					</div><!-- class col-xs-12 visible-xs -->
+
+					<div class="col-xs-12 text-left visible-xs">
+						<p> J'ai {{ age }} ans, l'heureuse maman de 4 enfants. </p>
 						<p> Artiste peintre, aimant aussi danser, chanter et écrire. </p>
 						<p> Biologiste fascinée par la beauté et la diversité des formes de vie. </p>
 						<p> Femme de marketing et de management commercial puis transversal durant 15 années. </p>
@@ -34,12 +82,29 @@
 						<p> Consultante en innovation relationnelle, organisationnelle et managériale. </p>
 						<p> Coach certifiée Coach and Team® (approche Vincent Lenhardt). </p>
 						<p> J'accompagne les dirigeants et leurs équipes pour déployer la confiance, l'engagement et l'audace d'inventer demain. </p>
-					</div><!-- class-media-body text-left -->
+					</div><!-- class col-xs-12 text-left visible-xs -->
+
+					<!-- Large, Medium & Small Screens -->
+					<div class="pull-right hidden-xs">
+						<img class="media-object img-responsive" src="img/profil.jpeg" alt="Muriel_Guillet">
+					</div><!-- class pull-right hidden-xs -->
+
+					<div class="media-body text-left hidden-xs">
+						<p> J'ai {{ age }} ans, l'heureuse maman de 4 enfants. </p>
+						<p> Artiste peintre, aimant aussi danser, chanter et écrire. </p>
+						<p> Biologiste fascinée par la beauté et la diversité des formes de vie. </p>
+						<p> Femme de marketing et de management commercial puis transversal durant 15 années. </p>
+						<p> La créatrice du cabinet AREVIA. </p>
+						<p> Consultante en innovation relationnelle, organisationnelle et managériale. </p>
+						<p> Coach certifiée Coach and Team® (approche Vincent Lenhardt). </p>
+						<p> J'accompagne les dirigeants et leurs équipes pour déployer la confiance, l'engagement et l'audace d'inventer demain. </p>
+					</div><!-- class media-body text-left hidden-xs -->
+
 				</div><!-- class media -->
 
 				<!-- Vocation Section -->
 				<div ng-show="section == 1" class="media">
-					<h1 class="lead text-left contentHeader"> Vocation </h1>
+					<h1 class="text-left contentHeader"> Vocation </h1>
 
 					<div class="media-body text-left">
 						<p> Ma vocation, ma raison d'être. </p>
@@ -55,9 +120,9 @@
 
 				<!-- Valeurs Section -->
 				<div ng-show="section == 2" class="media">
-					<h1 class="lead text-left contentHeader"> Valeurs </h1>
+					<h1 class="text-left contentHeader"> Valeurs </h1>
 
-					<div class="media-body text-left">
+					<div class="media-body text-justify">
 						<p> Les valeurs existent lorsque nous les incarnons... elles se révèlent souvent dans les épreuves. Les 4 valeurs principales qui me portent et que je mets au service de ma vie, de mon métier... </p>
 						<p> La première de toutes... <strong>La foi en l'homme</strong>... </p>
 						<p> <strong>La confiance lucide</strong> ou la lucidité confiante... l'une n'allant pas sans l'autre. </p>
@@ -72,7 +137,7 @@
 				<!-- Parcours Entrprise Section -->
 				<div ng-show="section == 3" class="media">
 
-					<h1 class="lead text-left contentHeader"> Parcours entreprise </h1>
+					<h1 class="text-left contentHeader"> Parcours entreprise </h1>
 
 					<div class="media-body text-left">
 
@@ -160,13 +225,13 @@
 						</div><!-- class panel-group -->
 
 						<dl class="dl-horizontal">
-							<dt> Depuis 2004: </dt>
+							<dt> Depuis 2004 : </dt>
 							<dd><p> Consultante et coach. </p></dd>
-							<dt> 1999 - 2004: </dt>
-							<dd><p> Responsable département santé société High-Tech en période de rachat et de fusion (management transversal 900 salariés). </p></dd>
-							<dt> 1991 - 1998: </dt>
+							<dt> 1999 - 2004 : </dt>
+							<dd><p> Responsable du département santé d'une société High-Tech en période de rachat et de fusion (management transversal 900 salariés). </p></dd>
+							<dt> 1991 - 1998 : </dt>
 							<dd><p> Responsable commercial Sud-Ouest bactériologie (groupe 3000 salariés). </p></dd>
-							<dt> 1990: </dt>
+							<dt> 1990 : </dt>
 							<dd><p> Responsable marketing communication (TPE, 15 salariés). </p></dd>
 						</dl>
 
@@ -175,7 +240,7 @@
 
 				<!-- Formations Section -->
 				<div ng-show="section == 4" class="media">
-					<h1 class="lead text-left contentHeader"> Formations </h1>
+					<h1 class="text-left contentHeader"> Formations </h1>
 
 					<div class="media-body text-left">
 
@@ -206,7 +271,7 @@
 						</div><!-- class well -->
 
 						<div class="well" ng-show="date == 3">
-							<p> 3<small class="topWord">ème</small> cycle IFG marketing, communication et information commerciale (IFG). </p>
+							<p> 3<small class="topWord">ème </small> cycle IFG marketing, communication et information commerciale (IFG). </p>
 							<p> Maîtrise en Biologie / Biochimie / Biotechnologies. </p>
 						</div><!-- class well -->
 
@@ -215,33 +280,33 @@
 
 				<!-- Philosophie Section -->
 				<div ng-show="section == 5" class="media">
-					<h1 class="lead text-left contentHeader"> Philosophie </h1>
+					<h1 class="text-left contentHeader"> Philosophie </h1>
 
 					<div class="media-body text-left">
-							
+
 						<div class="row">
-							<div class="col-md-3 col-md-offset-9">
+							<div class="col-lg-3 col-lg-offset-9 col-sm-4 col-sm-offset-8 col-xs-12">
 								<h4> Inventer demain </h4>
-							</div><!-- class col-md-3 col-md-offset-9 -->
+							</div><!-- class col-lg-3 col-lg-offset-9 col-sm-4 col-sm-offset-8 col-xs-12 -->
 						</div><!-- class row -->
 
 						<div class="row">
-							<div class="col-md-4 col-md-offset-5">
+							<div class="col-lg-4 col-lg-offset-5 col-sm-5 col-sm-offset-4 col-xs-12">
 								<h4> Capitaliser sur l'existant </h4>
-							</div><!-- class col-md-4 col-md-offset-5 -->
+							</div><!-- class col-lg-4 col-lg-offset-5 col-sm-5 col-sm-offset-4 col-xs-12 -->
 						</div><!-- class row -->
 
 						<div class="row">
-							<div class="col-md-5">
+							<div class="col-xs-12">
 								<h4> Ouvrir le champ des possibles </h4>
-							</div><!-- class col-md-4 col-md-offset-5 -->
+							</div><!-- class col-xs-12 -->
 						</div><!-- class row -->
 
 						<hr>
 
-						<p> J'accompagne les cadres et les dirigeants dans leur besoin et leur volonté d'incarner le plus efficacement les valeurs qu'ils portent jusque dans les principes de management et dans leurs actes. </p>
-						<p> Faire vivre pleinement ces valeurs et convictions donne à ces hommes et femmes davantage de cohérence, et donc plus de rayonnement et de puissance. </p>
-						<p> Faire partager celles-ci permet de mieux travailler ensemble et de dépasser les différences qui font la richesse des équipes pour inventer ensemble demain. </p>
+						<p class="text-justify"> J'accompagne les cadres et les dirigeants dans leur besoin et leur volonté d'incarner le plus efficacement les valeurs qu'ils portent jusque dans les principes de management et dans leurs actes. </p>
+						<p class="text-justify"> Faire vivre pleinement ces valeurs et convictions donne à ces hommes et femmes davantage de cohérence, et donc plus de rayonnement et de puissance. </p>
+						<p class="text-justify"> Faire partager celles-ci permet de mieux travailler ensemble et de dépasser les différences qui font la richesse des équipes pour inventer ensemble demain. </p>
 					</div><!-- class-media-body text-left -->
 				</div><!--class media -->
 

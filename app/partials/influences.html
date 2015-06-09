@@ -1,13 +1,18 @@
 <div class="container-fluid text-center">
 	<div class="container">
-		
-		<div class="page-header lead bg bg-blue">
-			<h1> Influences </h1>
-		</div><!-- class page-header -->
 
+		<img src="img/BLANC/A.png" class="hidden-xs hidden-sm" alt="logoBG">
+		
+		<div class="row">
+			<div class="page-header lead bg bg-blue">
+				<h1> Influences </h1>
+			</div><!-- class page-header -->
+		</div><!-- class row -->
+		
 		<div class="row">
 
-			<div class="col-md-3">
+			<!-- Large & Medium Sreens -->
+			<div class="col-md-3 visible-md visible-lg">
 				<ul class="nav nav-pills nav-stacked well sectionsMenu text-left" role="navigation">
 					<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a> Coach & Team </a></li>
 					<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a> PNL </a></li>
@@ -17,21 +22,62 @@
 					<li role="presentation" ng-click="section = 5" ng-class="{active: section == 5}"><a> L'Art </a></li>
 					<li role="presentation" ng-click="section = 6" ng-class="{active: section == 6}"><a> Le Zen </a></li>
 				</ul><!-- class nav nav-pills nav-stacked -->
-			</div><!-- class col-md-3 -->
+			</div><!-- class col-md-3 visible-md visible-lg -->
+
+			<!-- Small Screen -->
+			<ul class="nav nav-pills well text-left visible-sm" role="navigation">
+				<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a> Coach & Team </a></li>
+				<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a> PNL </a></li>
+				<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a> Analyse Transactionnelle </a></li>
+				<li role="presentation" ng-click="section = 3" ng-class="{active: section == 3}"><a> Systémique Entreprise </a></li>
+				<li role="presentation" ng-click="section = 4" ng-class="{active: section == 4}"><a> Biologie </a></li>
+				<li role="presentation" ng-click="section = 5" ng-class="{active: section == 5}"><a> L'Art </a></li>
+				<li role="presentation" ng-click="section = 6" ng-class="{active: section == 6}"><a> Le Zen </a></li>
+			</ul><!-- class nav nav-pills nav-stacked -->
+
+			<!-- XSmall Screens -->
+			<nav class="navbar navbar-default navSmallDevices visible-xs" role="navigation">
+				<div class="container-fluid">
+
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+							<span class="sr-only"> Toggle navigation </span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div><!-- class navbar-header -->
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+						<ul class="nav nav-pills nav-stacked">
+							<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Coach & Team </a></li>
+							<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> PNL </a></li>
+							<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Analyse Transactionnelle </a></li>
+							<li role="presentation" ng-click="section = 3" ng-class="{active: section == 3}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Systémique Entreprise </a></li>
+							<li role="presentation" ng-click="section = 4" ng-class="{active: section == 4}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Biologie </a></li>
+							<li role="presentation" ng-click="section = 5" ng-class="{active: section == 5}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> L'Art </a></li>
+							<li role="presentation" ng-click="section = 6" ng-class="{active: section == 6}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Le Zen </a></li>
+						</ul><!-- class nav navbar-pills nav-stacked -->
+
+					</div><!-- class collapse navbar-collapse -->
+
+				</div><!-- container-fluid -->
+			</nav><!-- class navbar navbar-default -->
 
 			<div class="col-md-9 jumbotron sectionsContent">			
 
 				<!-- Coach & Team Section -->
 				<div ng-show="section == 0" class="media">
-					<h1 class="lead text-left contentHeader"> Coach & Team </h1>
+					<h1 class="text-left contentHeader"> Coach & Team </h1>
 
 					<div class="media-body text-left">
-						<p> Le courant Coach & Team (CT) développé, depuis une trentaine d'années par Vincent Lenhardt et 10 écoles reposent sur plusieurs principes : </p>
+						<p> Le courant Coach & Team (CT) développé, depuis une trentaine d'années par Vincent Lenhardt et 10 écoles repose sur plusieurs principes : </p>
 						<p> La personne est considérée dans sa globalité (professionnelle, managériale, personnelle, corporelle et émotionnelle). </p>
 						<p> La personne coachée représente l'organisation. Chaque partie est porteuse du tout et a la forme du tout (principe holomorphique). </p>
 						<p> Le coach appréhende le monde dans la pensée complexe (cf Morin) non en voulant tout comprendre mais en acceptant ses ambiguïtés et ses paradoxes. </p>
-						<p> Il se centre sur le développement du sens, de l'autonomie et l'auto-organisation des personnes et des systèmes en intelligence collective autour d'une vision partagée. </p>
-						<p> Le coach CT accompagne ses clients dans son développement identitaire en aidant la personne à se construire sans apporter des solutions clés en main. </p>
+						<p> Il se centre sur le développement du sens, de l'autonomie, l'auto-organisation des personnes et des systèmes en intelligence collective autour d'une vision partagée. </p>
+						<p> Le coach CT accompagne ses clients dans leur développement identitaire en aidant la personne à se construire sans apporter des solutions clés en main. </p>
 						<h2><small> Biblio : </small></h2>
 						<ul>
 							<li>
@@ -52,7 +98,7 @@
 
 				<!-- PNL Section -->
 				<div ng-show="section == 1" class="media">
-					<h1 class="lead text-left contentHeader"> PNL </h1>
+					<h1 class="text-left contentHeader"> PNL </h1>
 
 					<div class="media-body text-left">
 						<h2><small> La PNL et ses présupposés : </small></h2>
@@ -69,7 +115,7 @@
 
 				<!-- Analyse Transactionnelle Section -->
 				<div ng-show="section == 2" class="media">
-					<h1 class="lead text-left contentHeader"> Analyse Transactionnelle </h1>
+					<h1 class="text-left contentHeader"> Analyse Transactionnelle </h1>
 
 					<div class="media-body text-left">
 						<p> L'Analyse transactionnelle utilise un modèle du Moi en trois parties : le diagramme des États du Moi qui aide à comprendre comment les gens sont structurés psychologiquement, comment les gens fonctionnent et expriment leur personnalité. </p> 
@@ -95,7 +141,7 @@
 
 				<!-- Systémique Entreprise Section -->
 				<div ng-show="section == 3" class="media">
-					<h1 class="lead text-left contentHeader"> Systémique Entreprise </h1>
+					<h1 class="text-left contentHeader"> Systémique Entreprise </h1>
 
 					<div class="media-body text-left">
 						<p><blockquote> "Penser systémique c'est penser chaque élément perçu comme faisant partie d'un ensemble plus vaste qui lui donne son sens et qui justifie sa présence." </blockquote></p> 
@@ -120,7 +166,7 @@
 
 				<!-- Biologie Section -->
 				<div ng-show="section == 4" class="media">
-					<h1 class="lead text-left contentHeader"> Biologie </h1>
+					<h1 class="text-left contentHeader"> Biologie </h1>
 
 					<div class="media-body text-left">
 						<p><blockquote> "Tout est métaphore de tout". </blockquote></p>
@@ -136,7 +182,7 @@
 
 				<!-- L'Art Section -->
 				<div ng-show="section == 5" class="media">
-					<h1 class="lead text-left contentHeader"> L'Art </h1>
+					<h1 class="text-left contentHeader"> L'Art </h1>
 
 					<div class="media-body text-left">
 						<p> L'art est l'utilisation consciente des compétences alliées à l'imagination créatrice pour créer une oeuvre de beauté. </p>
@@ -156,7 +202,7 @@
 
 				<!-- Le Zen Section -->
 				<div ng-show="section == 6" class="media">
-					<h1 class="lead text-left contentHeader"> Le Zen </h1>
+					<h1 class="text-left contentHeader"> Le Zen </h1>
 
 					<div class="media-body text-left">
 						<p> Le kyudo, la voie de l’arc,  est aussi appelé Zen debout car il invite à  trouver la vacuité, son centre, par la pratique du tir à l’arc traditionnel japonais. </p>

@@ -4,33 +4,34 @@
 
 var arevia = angular.module('arevia', ['ngRoute','areviaControllers','areviaServices','ngToast']);
 
-arevia.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
+arevia.config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
 
 	$routeProvider.
 	when('/', {
-		templateUrl: '/Arevia/app/partials/home.html',
+		templateUrl: '/Arevia/app/partials/home.min.html',
 		url: '/protected'
 	}).
 	when('/profil', {
-		templateUrl: '/Arevia/app/partials/profil.html'
+		templateUrl: '/Arevia/app/partials/profil.min.html'
 	}).
 	when('/influences', {
-		templateUrl: '/Arevia/app/partials/influences.html'
+		templateUrl: '/Arevia/app/partials/influences.min.html'
 	}).
 	when('/interventions', {
-		templateUrl: '/Arevia/app/partials/interventions.html'
+		templateUrl: '/Arevia/app/partials/interventions.min.html'
 	}).
 	when('/choisirArevia', {
-		templateUrl: '/Arevia/app/partials/choisirArevia.html'
+		templateUrl: '/Arevia/app/partials/choisirArevia.min.html'
 	}).
 	when('/boutique', {
-		templateUrl: '/Arevia/app/partials/boutique.html'
+		templateUrl: '/Arevia/app/partials/boutique.min.html'
 	}).
 	when('/contact', {
-		templateUrl: '/Arevia/app/partials/contact.html'
+		templateUrl: '/Arevia/app/partials/contact.min.html',
+		controller: 'ContactCtrl'
 	}).
 	when('/leMondeDArevia', {
-		templateUrl: '/Arevia/app/partials/leMondeDArevia.html',
+		templateUrl: '/Arevia/app/partials/leMondeDArevia.min.html',
 		controller: 'BlogCtrl',
 		resolve: {
 			session: ['SessionResolver', function resolveSession(SessionResolver) {
@@ -49,7 +50,7 @@ arevia.config(['$routeProvider','$locationProvider', function ($routeProvider, $
 
 	$locationProvider.html5Mode(false);
 
-}]).run(['$rootScope','AUTH_EVENTS','ARTICLE_EVENTS','FILE_EVENTS','POSTS_EVENTS','ngToast','AuthService','$log','Session','$q','$location','$injector',function ($rootScope, AUTH_EVENTS, ARTICLE_EVENTS, FILE_EVENTS, POSTS_EVENTS, ngToast, AuthService, $log, Session, $q, $location, $injector) {
+}]).run(['$rootScope','AUTH_EVENTS','ARTICLE_EVENTS','FILE_EVENTS','POSTS_EVENTS','MAIL_EVENTS','ngToast','AuthService','$log','Session','$q','$location','$injector','$window', function ($rootScope,AUTH_EVENTS,ARTICLE_EVENTS,FILE_EVENTS,POSTS_EVENTS,MAIL_EVENTS,ngToast,AuthService,$log,Session,$q,$location,$injector,$window) {
 
 	$rootScope.deferred = $q.defer();
 
@@ -57,7 +58,7 @@ arevia.config(['$routeProvider','$locationProvider', function ($routeProvider, $
 		$rootScope.currentUser = user;
 		$rootScope.deferred.resolve();
 
-		$rootScope.$on('$routeChangeStart', function (event, next, current) {
+		$rootScope.$on('$routeChangeStart', function (event,next,current) {
 			$rootScope.loaded = false;
 			if(next && next.data){
 				var authorizedRoles = next.data.authorizedRoles;
@@ -75,7 +76,7 @@ arevia.config(['$routeProvider','$locationProvider', function ($routeProvider, $
         });
 	});
 
-	$rootScope.$on('$routeChangeSuccess', function (event, next, current) {
+	$rootScope.$on('$routeChangeSuccess', function (event,next,current) {
 		$rootScope.loaded = true;
 		if(next && next.$$route){
 			var redirectionFunction = next.$$route.redirection;
@@ -161,6 +162,20 @@ arevia.config(['$routeProvider','$locationProvider', function ($routeProvider, $
 		});
 	});
 
+	// Mail
+	$rootScope.$on(MAIL_EVENTS.sendSuccess, function () {
+		var aToast = ngToast.create({
+			className: 'success',
+			content: 'Votre email vient d\'être envoyé !'
+		});
+	});
+	$rootScope.$on(MAIL_EVENTS.sendFailed, function () {
+		var aToast = ngToast.create({
+			className: 'warning',
+			content: 'Une erreur est survenue lors de l\'envoie de l\'email, merci de réessayer !'
+		});
+	});
+
 }]);
 
 arevia.config(['ngToastProvider', function(ngToast) {
@@ -198,4 +213,7 @@ arevia.constant('AUTH_EVENTS', {
 	postFailed: 'post-com-failed',
 	deleteSuccess: 'delete-com-success',
 	deleteFailed: 'delete-com-failed'
+}).constant('MAIL_EVENTS', {
+	sendSuccess: 'send-mail-success',
+	sendFailed: 'send-mail-failed'
 });

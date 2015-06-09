@@ -51,8 +51,8 @@
 #purple:hover {
     background-color: #C0D75E;
 }
-#yellow:hover {
-    background-color: #FDA800;
+#green:hover {
+    background-color: #355641;
 }
 #white:hover {
     background-color: #FFFFFF;
@@ -69,6 +69,9 @@ h1 {
     border: none;
     box-shadow: 4px 4px 6px black;
     margin: 0;
+}
+.navSmallDevices {
+    border-radius: 6px;
 }
 .navbar-inverse {
     background-color: transparent;
@@ -87,10 +90,11 @@ h1 {
 }
 img[alt="Muriel_Guillet"] {
     border-radius: 50%;
+    margin: 5% auto;
 }
 img[alt="Arrow"] {
     width: 80px;
-    height: 100px;
+    height: 80px;
 }
 .sectionsMenu {
     margin-top: 15vh;
@@ -227,3 +231,79 @@ img[alt="Arrow"] {
 .address {
     margin-top: 5%;
 }
+.noMargin {
+    margin-bottom: 0;
+}
+.mailLoadingContainer {
+    margin-top: 20%;
+}
+.noPadding {
+    padding-left: 0;
+    padding-right: 0;
+}
+li:hover, a:hover {
+    cursor: pointer;
+}
+li.noCursor {
+    cursor: default;
+}
+.checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"], .radio input[type="radio"], .radio-inline input[type="radio"] {
+    float: none;
+}
+
+
+/* Media Queries Mobile */
+@media (max-width: 767px) {
+    img[alt="logoBG"] {
+        width: 50%;
+        position: absolute;
+        left: 25%;
+        top: 30%;
+    }
+    img[alt="Arrow"] {
+        width: 55px;
+        height: 55px;
+    }
+    .mailLoadingContainer {
+        margin-top: 5%;
+        margin-bottom: 10%;
+    }
+}
+/* End Media Queries Mobile */
+
+/* Media Queries Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+    img[alt="logoBG"] {
+        width: 30%;
+        position: absolute;
+        left: 25%;
+        top: 30%;
+    }
+    .mailLoadingContainer {
+        margin-top: 5%;
+        margin-bottom: 10%;
+    }
+}
+/* End Media Queries Tablet */
+
+/* Media Queries Medium */
+@media (min-width: 992px) and (max-width: 1199px) {
+    img[alt="logoBG"] {
+        width: 30%;
+        position: absolute;
+        left: 0;
+        bottom: -10%;
+    }
+}
+/* End Media Queries Medium */
+
+/* Media Queries Large */
+@media (min-width: 1200px) {
+    img[alt="logoBG"] {
+        width: 30%;
+        position: absolute;
+        left: 0;
+        bottom: -20%;
+    }
+}
+/* End Media Queries Large */

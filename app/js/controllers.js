@@ -4,9 +4,11 @@
 
 var areviaControllers = angular.module('areviaControllers', ['angularFileUpload']);
 
-areviaControllers.controller('AppCtrl',['$scope','AuthService',function ($scope, AuthService) {
+areviaControllers.controller('AppCtrl',['$scope','AuthService', function ($scope,AuthService) {
 	$scope.section = 0;
 	$scope.isAuthorized = AuthService.isAuthorized;
+	var now = new Date().getFullYear();
+	$scope.age = now - 1964;
 }]);
 
 areviaControllers.controller('NavCtrl',['$scope','$location', function ($scope, $location) {
@@ -15,17 +17,23 @@ areviaControllers.controller('NavCtrl',['$scope','$location', function ($scope, 
 	};
 }]); // End NavCtrl
 
-areviaControllers.controller('ContactCtrl',['$scope','MailService', function ($scope, MailService) {
-
+areviaControllers.controller('ContactCtrl',['$scope','MailService','$rootScope','MAIL_EVENTS', function ($scope,MailService,$rootScope,MAIL_EVENTS) {
 	$scope.sendEmail = function (mail) {
+		$scope.loading = true;
 		MailService.post(mail).then(function (res) {
-			console.log("envoyé");
+			$scope.mail = "";
+			$scope.contactForm.$setPristine();
+			$scope.loading = false;
+			$rootScope.$broadcast(MAIL_EVENTS.sendSuccess);
+		}, function () {
+			$scope.loading = false;
+			$rootScope.$broadcast(MAIL_EVENTS.sendFailed);
 		});
 	};
 
 }]); // End ContactCtrl
 
-areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','$rootScope','FileService','ARTICLE_EVENTS','PostsService','AuthService','AUTH_EVENTS','$location','POSTS_EVENTS', function ($scope, ArticleService, $timeout, $rootScope, FileService, ARTICLE_EVENTS, PostsService, AuthService, AUTH_EVENTS, $location, POSTS_EVENTS) {
+areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','$rootScope','FileService','ARTICLE_EVENTS','PostsService','AuthService','AUTH_EVENTS','$location','POSTS_EVENTS', function ($scope,ArticleService,$timeout,$rootScope,FileService,ARTICLE_EVENTS,PostsService,AuthService,AUTH_EVENTS,$location,POSTS_EVENTS) {
 
 	$rootScope.display = function () {
 		ArticleService.get().then(function (res) {
@@ -59,7 +67,6 @@ areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','
 
 	$j('#articleModal').on('hidden.bs.modal', function(e) {
 		$timeout.cancel($scope.postPolling);
-		console.log("closed");
 	});
 
 	$scope.displayPost = function () {
@@ -107,7 +114,7 @@ areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','
 	};
 }]);
 
-areviaControllers.controller('PostCtrl',['$scope','$rootScope','PostsService','POSTS_EVENTS','ARTICLE_EVENTS', function ($scope, $rootScope, PostsService, POSTS_EVENTS, ARTICLE_EVENTS) {
+areviaControllers.controller('PostCtrl',['$scope','$rootScope','PostsService','POSTS_EVENTS','ARTICLE_EVENTS', function ($scope,$rootScope,PostsService,POSTS_EVENTS,ARTICLE_EVENTS) {
 
 	$scope.addPost = function (id) {
 		var com = {
@@ -135,7 +142,7 @@ areviaControllers.controller('PostCtrl',['$scope','$rootScope','PostsService','P
 
 }]);
 
-areviaControllers.controller('AuthCtrl',['$scope','AuthService','$rootScope','$route','AUTH_EVENTS','AuthInterceptor', function ($scope, AuthService, $rootScope, $route, AUTH_EVENTS, AuthInterceptor) {
+areviaControllers.controller('AuthCtrl',['$scope','AuthService','$rootScope','$route','AUTH_EVENTS','AuthInterceptor', function ($scope,AuthService,$rootScope,$route,AUTH_EVENTS,AuthInterceptor) {
 
 	$rootScope.currentUser = null;
 	$scope.credentials = {
@@ -160,7 +167,7 @@ areviaControllers.controller('AuthCtrl',['$scope','AuthService','$rootScope','$r
 
 }]);
 
-areviaControllers.controller('ArticleCtrl',['$scope','FileService','FILE_EVENTS','ARTICLE_EVENTS','ArticleService','$rootScope','$upload', function ($scope, FileService, FILE_EVENTS, ARTICLE_EVENTS, ArticleService, $rootScope, $upload) {
+areviaControllers.controller('ArticleCtrl',['$scope','FileService','FILE_EVENTS','ARTICLE_EVENTS','ArticleService','$rootScope','$upload', function ($scope,FileService,FILE_EVENTS,ARTICLE_EVENTS,ArticleService,$rootScope,$upload) {
 
 	$scope.imgIsEnable = false;
 	$scope.dismissModal = false;

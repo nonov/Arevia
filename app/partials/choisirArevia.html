@@ -1,25 +1,63 @@
 <div class="container-fluid text-center">
 	<div class="container">
 
-		<div class="page-header lead bg bg-orange">
-			<h1> Choisir <strong class="notStrong"> AREVIA </strong></h1>
-		</div><!-- class page-header -->
+		<img src="img/BLANC/A.png" class="hidden-xs hidden-sm" alt="logoBG">
+
+		<div class="row">
+			<div class="page-header lead bg bg-orange">
+				<h1> Choisir <strong class="notStrong"> AREVIA </strong></h1>
+			</div><!-- class page-header -->
+		</div><!-- class row -->
 
 		<div class="row">
 
-			<div class="col-md-3">
+			<!-- Large & Medium Sreens -->
+			<div class="col-md-3 visible-md visible-lg">
 				<ul class="nav nav-pills nav-stacked well sectionsMenu text-left" role="navigation">
 					<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a> 3 Bonnes Raisons </a></li>
 					<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a> Témoignages </a></li>
 					<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a> M. Guillet </a></li>
 				</ul><!-- class nav nav-pills nav-stacked -->
-			</div><!-- class col-md-3 -->
+			</div><!-- class col-md-3 visible-md visible-lg -->
 
-			<div class="col-md-9 jumbotron sectionsContent">	
+			<!-- Small Screen -->
+			<ul class="nav nav-pills well text-left visible-sm" role="navigation">
+				<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a> 3 Bonnes Raisons </a></li>
+				<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a> Témoignages </a></li>
+				<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a> M. Guillet </a></li>
+			</ul><!-- class nav nav-pills nav-stacked -->
+
+			<!-- XSmall Screens -->
+			<nav class="navbar navbar-default navSmallDevices visible-xs" role="navigation">
+				<div class="container-fluid">
+
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+							<span class="sr-only"> Toggle navigation </span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div><!-- class navbar-header -->
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+						<ul class="nav nav-pills nav-stacked">
+							<li role="presentation" ng-click="section = 0" ng-class="{active: section == 0}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> 3 Bonnes Raisons </a></li>
+							<li role="presentation" ng-click="section = 1" ng-class="{active: section == 1}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> Témoignages </a></li>
+							<li role="presentation" ng-click="section = 2" ng-class="{active: section == 2}"><a data-toggle="collapse" data-target="#bs-example-navbar-collapse-2"> M. Guillet </a></li>
+						</ul><!-- class nav navbar-pills nav-stacked -->
+
+					</div><!-- class collapse navbar-collapse -->
+
+				</div><!-- container-fluid -->
+			</nav><!-- class navbar navbar-default -->
+			
+			<div class="col-md-9 col-xs-12 jumbotron sectionsContent">	
 				
 				<!-- 3 Bonnes Raisons Section -->
 				<div ng-show="section == 0" class="media">
-					<h1 class="lead text-left contentHeader"> 3 Bonnes Raisons </h1>
+					<h1 class="text-left contentHeader"> 3 Bonnes Raisons </h1>
 
 					<div class="media-body text-left">
 						<p><strong class="notStrong"> AREVIA </strong> intervient en Français et en Anglais dans des contextes multiculturels. </p>
@@ -31,7 +69,7 @@
 
 				<!-- Témoignages Section -->
 				<div ng-show="section == 1" class="media">
-					<h1 class="lead text-left contentHeader"> Témoignages </h1>
+					<h1 class="text-left contentHeader"> Témoignages </h1>
 
 					<div class="media-body text-left">
 					</div><!-- class media-body text-left -->
@@ -39,13 +77,13 @@
 
 				<!-- M. Guillet Section -->
 				<div ng-show="section == 2" class="media">
-					<h1 class="lead text-left contentHeader"> M. Guillet </h1>
+					<h1 class="text-left contentHeader"> M. Guillet </h1>
 
 					<div class="media-body text-left">
 					</div><!-- class media-body text-left -->
 				</div><!-- class media -->
 
-			</div><!-- class col-md-9 jumbotron sectionsContent -->
+			</div><!-- class col-md-9 col-xs-12 jumbotron sectionsContent -->
 
 		</div><!-- class row -->
 
