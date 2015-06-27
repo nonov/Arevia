@@ -5,7 +5,6 @@
 var arevia = angular.module('arevia', ['ngRoute','areviaControllers','areviaServices','ngToast']);
 
 arevia.config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
-
 	$routeProvider.
 	when('/', {
 		templateUrl: '/Arevia/app/partials/home.min.html',
@@ -30,6 +29,10 @@ arevia.config(['$routeProvider','$locationProvider', function ($routeProvider,$l
 		templateUrl: '/Arevia/app/partials/contact.min.html',
 		controller: 'ContactCtrl'
 	}).
+	when('/noNewsletter/:email/:token', {
+		templateUrl: '/Arevia/app/partials/noNewsletter.html',
+		controller: 'NewsletterCtrl'
+	}).
 	when('/leMondeDArevia', {
 		templateUrl: '/Arevia/app/partials/leMondeDArevia.min.html',
 		controller: 'BlogCtrl',
@@ -50,7 +53,7 @@ arevia.config(['$routeProvider','$locationProvider', function ($routeProvider,$l
 
 	$locationProvider.html5Mode(false);
 
-}]).run(['$rootScope','AUTH_EVENTS','ARTICLE_EVENTS','FILE_EVENTS','POSTS_EVENTS','MAIL_EVENTS','ngToast','AuthService','$log','Session','$q','$location','$injector','$window', function ($rootScope,AUTH_EVENTS,ARTICLE_EVENTS,FILE_EVENTS,POSTS_EVENTS,MAIL_EVENTS,ngToast,AuthService,$log,Session,$q,$location,$injector,$window) {
+}]).run(['$rootScope','AUTH_EVENTS','ARTICLE_EVENTS','FILE_EVENTS','POSTS_EVENTS','MAIL_EVENTS','NEWSLETTER_EVENTS','ngToast','AuthService','$log','Session','$q','$location','$injector','$window', function ($rootScope,AUTH_EVENTS,ARTICLE_EVENTS,FILE_EVENTS,POSTS_EVENTS,MAIL_EVENTS,NEWSLETTER_EVENTS,ngToast,AuthService,$log,Session,$q,$location,$injector,$window) {
 
 	$rootScope.deferred = $q.defer();
 
@@ -176,6 +179,56 @@ arevia.config(['$routeProvider','$locationProvider', function ($routeProvider,$l
 		});
 	});
 
+	// Newsletter
+	$rootScope.$on(NEWSLETTER_EVENTS.addSuccess, function () {
+		var aToast = ngToast.create({
+			className: 'success',
+			content: 'Vous avez souscrit à la newsletter, merci !'
+		});
+	});
+	$rootScope.$on(NEWSLETTER_EVENTS.addFailed, function () {
+		var aToast = ngToast.create({
+			className: 'warning',
+			content: 'Une erreur est survenue lors de votre ajout à la newsletter, merci de réessayer !'
+		});
+	});
+	$rootScope.$on(NEWSLETTER_EVENTS.deleteSuccess, function () {
+		var aToast = ngToast.create({
+			className: 'success',
+			content: 'Vous avez bien été rétiré de notre newsletter !'
+		});
+	});
+	$rootScope.$on(NEWSLETTER_EVENTS.deleteFailed, function () {
+		var aToast = ngToast.create({
+			className: 'warning',
+			content: 'Une erreur est survenue lors de votre retrait de la newsletter, merci de réessayer !'
+		});
+	});
+	$rootScope.$on(NEWSLETTER_EVENTS.sendSuccess, function () {
+		var aToast = ngToast.create({
+			className: 'success',
+			content: 'Un email a été envoyé à toutes les personnes ayant souscrit à votre newsletter !'
+		});
+	});
+	$rootScope.$on(NEWSLETTER_EVENTS.sendFailed, function () {
+		var aToast = ngToast.create({
+			className: 'warning',
+			content: 'L\'envoi de l\'email censé avertir les abonnés à la newsletter à échoué, merci de réessayer !'
+		});
+	});
+	$rootScope.$on(NEWSLETTER_EVENTS.noSubscribers, function () {
+		var aToast = ngToast.create({
+			className: 'warning',
+			content: 'Aucune personne n\'a souscrit à la newsletter !'
+		});
+	});
+	$rootScope.$on(NEWSLETTER_EVENTS.alreadyRegistred, function () {
+		var aToast = ngToast.create({
+			className: 'warning',
+			content: 'Vous avez déjà souscrit à cette newsletter, merci !'
+		});
+	});	
+
 }]);
 
 arevia.config(['ngToastProvider', function(ngToast) {
@@ -186,7 +239,7 @@ arevia.config(['ngToastProvider', function(ngToast) {
 		animation: 'slide',
 		dismissOnClick: true,
 		dismissOnTimeout: true,
-		timeout: 3000,
+		timeout: 3500,
 	});
 }]);
 
@@ -216,4 +269,13 @@ arevia.constant('AUTH_EVENTS', {
 }).constant('MAIL_EVENTS', {
 	sendSuccess: 'send-mail-success',
 	sendFailed: 'send-mail-failed'
+}).constant('NEWSLETTER_EVENTS', {
+	addSuccess: 'addTo-newsletter-success',
+	addFailed: 'addTo-newsletter-failed',
+	sendSuccess: 'send-newsletter-success',
+	sendFailed: 'send-newsletter-failed',
+	deleteSuccess: 'deleteTo-newsletter-success',
+	deleteFailed: 'deleteTo-newsletter-failed',
+	alreadyRegistred: 'alreadyRegistred-newsletter',
+	noSubscribers: 'noSubscribers-newsletter'
 });

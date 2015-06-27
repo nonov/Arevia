@@ -23,3 +23,7 @@ Route::resource('api/post', 'PostController');
 Route::resource('api/file', 'FileController');
 
 Route::resource('api/mail', 'MailController');
+
+Route::resource('api/newsletter/sendEmail', 'NewsletterController@sendEmail');
+Route::resource('api/newsletter/out', 'NewsletterController@delete');
+Route::resource('api/newsletter', 'NewsletterController');

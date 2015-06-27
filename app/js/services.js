@@ -4,6 +4,28 @@
 
 var areviaServices = angular.module('areviaServices', ['ngResource']);
 
+areviaServices.factory('NewsletterService',['$http', function ($http) {
+
+	var newsletterService = {};
+
+	newsletterService.post = function (subscriber) {
+		return $http
+		.post('/Arevia/RESTapi/public/api/newsletter', subscriber);
+	};
+
+	newsletterService.sendEmail = function (article) {
+		return $http
+		.post('/Arevia/RESTapi/public/api/newsletter/sendEmail', article);
+	};
+
+	newsletterService.deleteNewsletter = function (email, token) {
+		return $http
+		.post('/Arevia/RESTapi/public/api/newsletter/out', {email: email, token: token});
+	};
+
+	return newsletterService;
+}]);
+
 areviaServices.factory('MailService',['$http', function ($http) {
 
 	var mailService = {};
@@ -213,7 +235,7 @@ areviaServices.factory('Session', function () {
 });// End Session
 
 
-areviaServices.factory('AuthInterceptor',['$rootScope','$q','AUTH_EVENTS','FILE_EVENTS','ARTICLE_EVENTS','POSTS_EVENTS','MAIL_EVENTS', function ($rootScope, $q, AUTH_EVENTS, FILE_EVENTS, ARTICLE_EVENTS, POSTS_EVENTS, MAIL_EVENTS) {
+areviaServices.factory('AuthInterceptor',['$rootScope','$q','AUTH_EVENTS','FILE_EVENTS','ARTICLE_EVENTS','POSTS_EVENTS','MAIL_EVENTS','NEWSLETTER_EVENTS', function ($rootScope, $q, AUTH_EVENTS, FILE_EVENTS, ARTICLE_EVENTS, POSTS_EVENTS, MAIL_EVENTS,NEWSLETTER_EVENTS) {
 
 	return {
 
@@ -231,7 +253,12 @@ areviaServices.factory('AuthInterceptor',['$rootScope','$q','AUTH_EVENTS','FILE_
 				452: ARTICLE_EVENTS.deleteFailed,
 				460: POSTS_EVENTS.postFailed,
 				461: POSTS_EVENTS.deleteFailed,
-				470: MAIL_EVENTS.sendFailed
+				470: MAIL_EVENTS.sendFailed,
+				480: NEWSLETTER_EVENTS.deleteFailed,
+				481: NEWSLETTER_EVENTS.alreadyRegistred,
+				482: NEWSLETTER_EVENTS.sendFailed,
+				483: NEWSLETTER_EVENTS.noSubscribers,
+				483: NEWSLETTER_EVENTS.addFailed
 			}[response.status], response);
 
 			return $q.reject(response);

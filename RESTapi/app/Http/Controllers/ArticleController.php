@@ -2,6 +2,7 @@
 
 use DB;
 use Auth;
+use Image;
 use Api\Http\Requests;
 use Api\Http\Controllers\Controller;
 
@@ -19,7 +20,8 @@ class ArticleController extends Controller {
 		$result = DB::select('select * from articles order by id desc');
 		if(count($result)) 
 		{
-			foreach ($result as $article) {
+			foreach ($result as $article) 
+			{
 				$article->date = date('F d, Y', strtotime($article->date));
 			}
 			return response()->json($result);
@@ -64,6 +66,12 @@ class ArticleController extends Controller {
 	{
 		if(DB::insert('insert into articles (title, content, img_path) values (?, ?, ?)', [$request->input('title'), $request->input('content'), $request->input('img_path')])) 
 		{
+			if($result = DB::select('select * from articles where title = ?', [$request->input('title')])) {
+				$article_id = $result[0]->id;
+				/*foreach ($request->liens as $key => $value) {
+					DB::insert('insert into liens (url, id_article) values (?, ?)', [$value['url'], $article_id]);
+				}*/
+			}
 			return response("1");
 		} 
 		return response("Insertion Failed.", 450);

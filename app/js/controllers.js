@@ -4,12 +4,36 @@
 
 var areviaControllers = angular.module('areviaControllers', ['angularFileUpload']);
 
+areviaControllers.controller('NewsletterCtrl',['$scope','$routeParams','NewsletterService','$rootScope','NEWSLETTER_EVENTS','$location', function ($scope,$routeParams,NewsletterService,$rootScope,NEWSLETTER_EVENTS,$location) {
+
+	$scope.outNewsletter = function () {
+		NewsletterService.deleteNewsletter($routeParams.email,$routeParams.token).then(function () {
+			$rootScope.$broadcast(NEWSLETTER_EVENTS.deleteSuccess);
+			$location.path('#/');
+		}, function () {
+			$rootScope.$broadcast(NEWSLETTER_EVENTS.deleteFailed);
+		}); // End delete()
+
+	}; // End outNewsletter()
+
+}]); // End NewsletterCtrl
+
 areviaControllers.controller('AppCtrl',['$scope','AuthService', function ($scope,AuthService) {
 	$scope.section = 0;
 	$scope.isAuthorized = AuthService.isAuthorized;
 	var now = new Date().getFullYear();
 	$scope.age = now - 1964;
-}]);
+
+	$scope.$on('$routeChangeSuccess', function(next, current) { 
+		var route = window.location.href.substring(30);
+		if(route === "leMondeDArevia") {
+			document.getElementById('indexHtml').className = "";
+		} else {
+			document.getElementById('indexHtml').className = "noScroll";
+		}
+	});
+
+}]); // End AppCtrl
 
 areviaControllers.controller('NavCtrl',['$scope','$location', function ($scope, $location) {
 	$scope.getPath = function () {
@@ -53,7 +77,7 @@ areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','
 	$scope.fullArticle = function (article) {
 		$timeout.cancel($scope.articlePolling);
 		$rootScope.currentArticle = article;
-		$j('#articleModal').modal('show');
+		$('#articleModal').modal('show');
 		PostsService.get(article.id).then(function (res) {
 			$rootScope.currentArticlePosts = res;
 			$rootScope.messagePost = null;
@@ -65,7 +89,7 @@ areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','
 		});
 	}; // End FullArticle
 
-	$j('#articleModal').on('hidden.bs.modal', function(e) {
+	$('#articleModal').on('hidden.bs.modal', function(e) {
 		$timeout.cancel($scope.postPolling);
 	});
 
@@ -92,7 +116,7 @@ areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','
 
 	$scope.OpenDeleteArticle = function (article) {
 		$rootScope.delArticle = article;
-		$j('#deleteArticleModal').modal('show');
+		$('#deleteArticleModal').modal('show');
 	};
 
 	$scope.deleteArticle = function () {
@@ -114,7 +138,7 @@ areviaControllers.controller('BlogCtrl', ['$scope','ArticleService','$timeout','
 	};
 }]);
 
-areviaControllers.controller('PostCtrl',['$scope','$rootScope','PostsService','POSTS_EVENTS','ARTICLE_EVENTS', function ($scope,$rootScope,PostsService,POSTS_EVENTS,ARTICLE_EVENTS) {
+areviaControllers.controller('PostCtrl',['$scope','$rootScope','PostsService','NewsletterService','POSTS_EVENTS','ARTICLE_EVENTS','NEWSLETTER_EVENTS', function ($scope,$rootScope,PostsService,NewsletterService,POSTS_EVENTS,ARTICLE_EVENTS,NEWSLETTER_EVENTS) {
 
 	$scope.addPost = function (id) {
 		var com = {
@@ -123,8 +147,23 @@ areviaControllers.controller('PostCtrl',['$scope','$rootScope','PostsService','P
 			firstname: $scope.posts.firstname,
 			email: $scope.posts.email
 		};
-		PostsService.post(com).then(function (res){
+		var subscriber = {
+			newsletter: $scope.posts.newsletter,
+			email: $scope.posts.email
+		};
+		PostsService.post(com).then(function (){
 			$rootScope.$broadcast(POSTS_EVENTS.postSuccess);
+			if(subscriber.newsletter) {
+				NewsletterService.post(subscriber).then(function () {
+					$rootScope.$broadcast(NEWSLETTER_EVENTS.addSuccess);
+				}, function (res) {
+					if(res.data === 'Already on the database') {
+						$rootScope.$broadcast(NEWSLETTER_EVENTS.alreadyRegistred);
+					} else {
+						$rootScope.$broadcast(NEWSLETTER_EVENTS.addFailed);
+					}
+				});
+			}			
 		}, function (res) {
 			$rootScope.$broadcast(POSTS_EVENTS.postFailed);
 		});
@@ -137,7 +176,7 @@ areviaControllers.controller('PostCtrl',['$scope','$rootScope','PostsService','P
 
 	$scope.OpenDeletePost = function (id) {
 		$rootScope.delPost = id;
-		$j('#deletePostModal').modal('show');
+		$('#deletePostModal').modal('show');
 	};
 
 }]);
@@ -155,7 +194,7 @@ areviaControllers.controller('AuthCtrl',['$scope','AuthService','$rootScope','$r
 		AuthService.login(credentials).then(function (user) {
 			$rootScope.currentUser = user;
 			$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-			$j('#connexionModal').modal('hide');
+			$('#connexionModal').modal('hide');
 			$route.reload();
 		}, function (res) {
 			res.status = parseInt(res.data)
@@ -167,10 +206,17 @@ areviaControllers.controller('AuthCtrl',['$scope','AuthService','$rootScope','$r
 
 }]);
 
-areviaControllers.controller('ArticleCtrl',['$scope','FileService','FILE_EVENTS','ARTICLE_EVENTS','ArticleService','$rootScope','$upload', function ($scope,FileService,FILE_EVENTS,ARTICLE_EVENTS,ArticleService,$rootScope,$upload) {
+areviaControllers.controller('ArticleCtrl',['$scope','FileService','FILE_EVENTS','ARTICLE_EVENTS','NEWSLETTER_EVENTS','ArticleService','$rootScope','$upload','NewsletterService', function ($scope,FileService,FILE_EVENTS,ARTICLE_EVENTS,NEWSLETTER_EVENTS,ArticleService,$rootScope,$upload,NewsletterService) {
 
 	$scope.imgIsEnable = false;
 	$scope.dismissModal = false;
+	$scope.cpt = 1;
+	$scope.liens = [];
+
+	$scope.addNewInput = function () {
+		$scope.liens.push({id: $scope.cpt});
+		$scope.cpt++;
+	};
 
 	// Waiting for a Drop
 	$scope.$watch('files', function () {
@@ -193,28 +239,39 @@ areviaControllers.controller('ArticleCtrl',['$scope','FileService','FILE_EVENTS'
 
 	// When Form is Submitted
 	$scope.addArticle = function() {
-
+		
 		// Article Creation (JSON)
 		$scope.article = {
 			title: $scope.inputs.title,
 			content: $scope.inputs.content,
-			img_path: $scope.fileName
+			img_path: $scope.fileName,
+			// liens: $scope.liens
 		};
 
 		// Send Article To ArticleService
 		ArticleService.post($scope.article).then(function (res) {
 			$rootScope.$broadcast(ARTICLE_EVENTS.postSuccess);
-			$j('#addArticleModal').modal('hide');
+			$('#addArticleModal').modal('hide');
 			$rootScope.message = "";
+			NewsletterService.sendEmail($scope.article).then(function () {
+				$rootScope.$broadcast(NEWSLETTER_EVENTS.sendSuccess);
+			}, function (res) {
+				if(res.data === 'No subscribers') {
+					$rootScope.$broadcast(NEWSLETTER_EVENTS.noSubscribers);
+				} else {
+					$rootScope.$broadcast(NEWSLETTER_EVENTS.sendFailed);
+				}
+			});
 		}, function () {
 			$rootScope.$broadcast(ARTICLE_EVENTS.postFailed);
 		});
 
 		// Reset Form After Submitting
 		$scope.inputs = "";
+		$scope.liens = [];
 		$scope.imgIsEnable = false;
 		$scope.addArticleForm.$setPristine();
-
+		
 	}; // End addArticle()
 
 }]);

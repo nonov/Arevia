@@ -1,4 +1,3 @@
-var $j = jQuery.noConflict();
-$j(document).ready(function () {
-    $j('.carousel').carousel();
+$(document).ready(function () {
+    $('.carousel').carousel();
 });

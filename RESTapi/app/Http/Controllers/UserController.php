@@ -31,7 +31,7 @@ class UserController extends Controller {
 		if(Auth::attempt(['login' => $request->input('login'), 'password' => $request->input('password')]))
 		{
 			$this->_user = Auth::user();
-				return response()->json(["id" => csrf_token(), "user" => $this->_user]);
+			return response()->json(["id" => csrf_token(), "user" => $this->_user]);
 		}
 		return 0;
 	}

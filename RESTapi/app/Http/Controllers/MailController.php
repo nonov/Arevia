@@ -39,7 +39,7 @@ class MailController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		if(Mail::send('emails.activation', ['firstname' => $request->input('firstname'), 'lastname' => $request->input('lastname'), 'company' => $request->input('company'), 'poste' => $request->input('poste'), 'email' => $request->input('email'), 'object' => $request->input('object'), 'content' => $request->input('message')], function($message) { 
+		if(Mail::send('emails.contact', $request->all(), function($message) { 
 			$message->to('nono.viricel@gmail.com', 'Arevia')->subject('Arevia : un client vous a laissé un message !'); 
 		}))
 		{

@@ -61,6 +61,9 @@
 body {
     background-color: #333333;
 }
+.noScroll {
+    overflow: hidden;
+}
 h1 {
     font-weight: 200;
 }

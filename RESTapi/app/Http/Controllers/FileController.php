@@ -83,7 +83,6 @@ class FileController extends Controller {
 	{
 		if($path = DB::select('select img_path from articles where id = ?', [$id]))
 		{
-			error_log($path[0]->img_path);
 			if(File::delete($_SERVER['DOCUMENT_ROOT'].$path[0]->img_path))
 			{
 				return response("Delete Success");
